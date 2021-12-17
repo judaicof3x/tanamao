@@ -3,7 +3,7 @@
 	<!--begin::Head-->
 	<head><base href="">
 		<title>Tá na mão</title>
-        <link rel="shortcut icon" href="{{ URL::asset('media/logos/favicon.ico') }}" />
+        <link rel="shortcut icon" href="{{ URL::asset('media/logos/png/branco/branco1.png') }}" />
         @include('painel.layouts.__includes.meta')
 		<!--begin::Fonts-->
 		    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
