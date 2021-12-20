@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PainelController;
+use App\Http\Controllers\Supervisao\RoleController;
 
 /**
  * Excluir inicio
@@ -23,4 +24,7 @@ Route::middleware(['auth:sanctum', 'verified'])
     
         // Rotas do painel
         Route::get('', [PainelController::class, 'home'])->name('home');
+
+        // Rotas Supervisão -> Usuários -> Perfis
+        Route::get('cargos', [RoleController::class, 'index'])->name('cargos.index');
 });

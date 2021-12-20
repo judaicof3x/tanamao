@@ -139,16 +139,16 @@
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
-                                <span class="menu-title">Perfis</span>
+                                <span class="menu-title">Cargos</span>
                                 <span class="menu-arrow"></span>
                             </span>
                             <div class="menu-sub menu-sub-accordion">
                                 <div class="menu-item">
-                                    <a class="menu-link" href="#">
+                                    <a class="menu-link @if(request()->routeIs('painel.cargos.index')) active @endif" href="{{ route('painel.cargos.index') }}">
                                         <span class="menu-bullet">
                                             <span class="bullet bullet-dot"></span>
                                         </span>
-                                        <span class="menu-title">Lista de perfis</span>
+                                        <span class="menu-title">Lista de cargos</span>
                                     </a>
                                 </div>
                                 <div class="menu-item">
@@ -156,7 +156,7 @@
                                         <span class="menu-bullet">
                                             <span class="bullet bullet-dot"></span>
                                         </span>
-                                        <span class="menu-title">Cadastrar perfil</span>
+                                        <span class="menu-title">Cadastrar cargo</span>
                                     </a>
                                 </div>
                             </div>
