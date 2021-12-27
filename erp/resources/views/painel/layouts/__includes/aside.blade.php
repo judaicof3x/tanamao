@@ -29,7 +29,7 @@
                 
                 <div class="menu-item">
                     <div class="menu-content pb-2">
-                        <span class="menu-section text-muted text-uppercase fs-8 ls-1">Dashboard</span>
+                        <span class="menu-section text-muted text-uppercase fs-8 ls-1">Ecossistema</span>
                     </div>
                 </div>
                 <div class="menu-item">
@@ -46,7 +46,7 @@
                             </span>
                             <!--end::Svg Icon-->
                         </span>
-                        <span class="menu-title">Visão geral</span>
+                        <span class="menu-title">Dashboard</span>
                     </a>
                 </div>
 
@@ -186,8 +186,8 @@
                         <span class="menu-title">Planos</span>
                         <span class="menu-arrow"></span>
                     </span>
-                    <div class="menu-sub menu-sub-accordion">
-                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion mb-1">
+                    <div class="menu-sub menu-sub-accordion @if(request()->routeIs('painel.planos.index')) show @endif">
+                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion @if(request()->routeIs('painel.planos.index')) show @endif mb-1">
                             <span class="menu-link">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
@@ -197,7 +197,7 @@
                             </span>
                             <div class="menu-sub menu-sub-accordion">
                                 <div class="menu-item">
-                                    <a class="menu-link" href="#">
+                                    <a class="menu-link @if(request()->routeIs('painel.planos.index')) active @endif" href="{{ route('painel.planos.index') }}">
                                         <span class="menu-bullet">
                                             <span class="bullet bullet-dot"></span>
                                         </span>
@@ -214,21 +214,21 @@
                                 </div>
                             </div>
                         </div>
-                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion @if(request()->routeIs('painel.planos.detalhes.index')) show @endif">
                             <span class="menu-link">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
-                                <span class="menu-title">Itens</span>
+                                <span class="menu-title">Detalhes</span>
                                 <span class="menu-arrow"></span>
                             </span>
                             <div class="menu-sub menu-sub-accordion">
                                 <div class="menu-item">
-                                    <a class="menu-link" href="#">
+                                    <a class="menu-link @if(request()->routeIs('painel.planos.detalhes.index')) active @endif" href="{{ route('painel.planos.detalhes.index') }}">
                                         <span class="menu-bullet">
                                             <span class="bullet bullet-dot"></span>
                                         </span>
-                                        <span class="menu-title">Lista de itens</span>
+                                        <span class="menu-title">Lista de detalhes</span>
                                     </a>
                                 </div>
                                 <div class="menu-item">
@@ -236,7 +236,7 @@
                                         <span class="menu-bullet">
                                             <span class="bullet bullet-dot"></span>
                                         </span>
-                                        <span class="menu-title">Cadastrar item</span>
+                                        <span class="menu-title">Cadastrar detalhe</span>
                                     </a>
                                 </div>
                             </div>
