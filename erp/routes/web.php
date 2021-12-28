@@ -32,17 +32,19 @@ Route::middleware(['auth:sanctum', 'verified'])
 
         // Rotas Supervisão -> Planos -> Detalhes
         Route::get('planos/detalhes', [DetailController::class, 'index'])->name('planos.detalhes.index'); // lista os detalhes dos planos
-        Route::get('planos/detalhes/cadastrar', [DetailController::class, 'create'])->name('planos.detalhes.create'); // exibe o form de criação
-        Route::post('planos/detalhes/cadastrar', [DetailController::class, 'store'])->name('planos.detalhes.store'); // salva o detalhe no banco
-        Route::get('planos/detalhes/{slug}', [DetailController::class, 'edit'])->name('planos.detalhes.edit'); // exibe o form de edição
-        Route::put('planos/detalhes/{slug}', [DetailController::class, 'update'])->name('planos.detalhes.update'); // atualiza o detalhe no banco
-        Route::delete('planos/detalhes/{slug}', [DetailController::class, 'destroy'])->name('planos.detalhes.destroy'); // remove o detalhe no banco
+        Route::get('planos/detalhes/adicionar', [DetailController::class, 'create'])->name('planos.detalhes.create'); // exibe o form de criação
+        Route::post('planos/detalhes/adicionar', [DetailController::class, 'store'])->name('planos.detalhes.store'); // salva o detalhe no banco
+        Route::get('planos/detalhes/{slug}', [DetailController::class, 'show'])->name('planos.detalhes.show'); // exibe o detalhe
+        Route::get('planos/detalhes/{slug}/editar', [DetailController::class, 'edit'])->name('planos.detalhes.edit'); // exibe o form de edição
+        Route::put('planos/detalhes/{id}/editar', [DetailController::class, 'update'])->name('planos.detalhes.update'); // atualiza o detalhe no banco
+        Route::delete('planos/detalhes/{id}', [DetailController::class, 'destroy'])->name('planos.detalhes.destroy'); // remove o detalhe no banco
 
         // Rotas Supervisão -> Planos
         Route::get('planos', [PlanController::class, 'index'])->name('planos.index'); // lista os planos
-        Route::get('planos/cadastrar', [PlanController::class, 'create'])->name('planos.create'); // exibe o form de criação
-        Route::post('planos/cadastrar', [PlanController::class, 'store'])->name('planos.store'); // salva o plano no banco
-        Route::get('planos/{slug}', [PlanController::class, 'edit'])->name('planos.edit'); // exibe o form de edição
-        Route::put('planos/{slug}', [PlanController::class, 'update'])->name('planos.update'); // atualiza o plano no banco
-        Route::delete('planos/{slug}', [PlanController::class, 'destroy'])->name('planos.destroy'); // remove o plano no banco
+        Route::get('planos/adicionar', [PlanController::class, 'create'])->name('planos.create'); // exibe o form de criação
+        Route::post('planos/adicionar', [PlanController::class, 'store'])->name('planos.store'); // salva o plano no banco
+        Route::get('planos/{slug}', [PlanController::class, 'show'])->name('planos.show'); // exibe o plano
+        Route::get('planos/{slug}/editar', [PlanController::class, 'edit'])->name('planos.edit'); // exibe o form de edição
+        Route::put('planos/{id}/editar', [PlanController::class, 'update'])->name('planos.update'); // atualiza o plano no banco
+        Route::delete('planos/{id}', [PlanController::class, 'destroy'])->name('planos.destroy'); // remove o plano no banco
 });

@@ -171,7 +171,7 @@
                         </div>
                     </div>
                 </div>
-                <div data-kt-menu-trigger="click" class="menu-item menu-accordion mb-1">
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion mb-1 @if(request()->routeIs('painel.planos.index') OR request()->routeIs('painel.planos.detalhes.index') OR request()->routeIs('painel.planos.detalhes.create') OR request()->routeIs('painel.planos.detalhes.show') OR request()->routeIs('painel.planos.detalhes.edit')) show @endif">
                     <span class="menu-link">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen051.svg-->
@@ -214,7 +214,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion @if(request()->routeIs('painel.planos.detalhes.index')) show @endif">
+                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion @if(request()->routeIs('painel.planos.detalhes.index') OR request()->routeIs('painel.planos.detalhes.create') OR request()->routeIs('painel.planos.detalhes.show') OR request()->routeIs('painel.planos.detalhes.edit')) show @endif">
                             <span class="menu-link">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
@@ -224,7 +224,7 @@
                             </span>
                             <div class="menu-sub menu-sub-accordion">
                                 <div class="menu-item">
-                                    <a class="menu-link @if(request()->routeIs('painel.planos.detalhes.index')) active @endif" href="{{ route('painel.planos.detalhes.index') }}">
+                                    <a class="menu-link @if(request()->routeIs('painel.planos.detalhes.index') OR request()->routeIs('painel.planos.detalhes.show') OR request()->routeIs('painel.planos.detalhes.edit')) active @endif" href="{{ route('painel.planos.detalhes.index') }}">
                                         <span class="menu-bullet">
                                             <span class="bullet bullet-dot"></span>
                                         </span>
@@ -232,7 +232,7 @@
                                     </a>
                                 </div>
                                 <div class="menu-item">
-                                    <a class="menu-link" href="#">
+                                    <a class="menu-link @if(request()->routeIs('painel.planos.detalhes.create')) active @endif" href="#">
                                         <span class="menu-bullet">
                                             <span class="bullet bullet-dot"></span>
                                         </span>
