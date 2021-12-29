@@ -16,7 +16,7 @@ class DetailController extends Controller
      */
     public function index()
     {
-        $details = Detail::all();
+        $details = Detail::withTrashed()->get();
         return view('painel.supervisao.planos.detalhes.index', compact('details'));
     }
 
@@ -50,7 +50,7 @@ class DetailController extends Controller
      */
     public function show($slug)
     {
-        $detail = Detail::where('slug', $slug)->firstOrFail();
+        $detail = Detail::where('slug', $slug)->withTrashed()->firstOrFail();
         return view('painel.supervisao.planos.detalhes.show', compact('detail'));
     }
 
@@ -62,7 +62,7 @@ class DetailController extends Controller
      */
     public function edit($slug)
     {
-        $detail = Detail::where('slug', $slug)->firstOrFail();
+        $detail = Detail::where('slug', $slug)->withTrashed()->firstOrFail();
         return view('painel.supervisao.planos.detalhes.edit', compact('detail'));
     }
 
@@ -75,13 +75,13 @@ class DetailController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $detail = Detail::findOrFail($id)->update($request->except('_token'));
-        $detail = Detail::findOrFail($id);
+        $detail = Detail::withTrashed()->findOrFail($id)->update($request->except('_token'));
+        $detail = Detail::withTrashed()->findOrFail($id);
         return redirect()->route('painel.planos.detalhes.edit', $detail->slug);
     }
 
     /**
-     * Remove um detalhe no banco.
+     * Desativa um detalhe no banco.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -89,6 +89,18 @@ class DetailController extends Controller
     public function destroy($id)
     {
         Detail::findOrFail($id)->destroy($id);
+        return redirect()->route('painel.planos.detalhes.index');
+    }
+
+    /**
+     * Ativa um detalhe no banco.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function restore($id)
+    {
+        Detail::withTrashed()->findOrFail($id)->restore($id);
         return redirect()->route('painel.planos.detalhes.index');
     }
 }

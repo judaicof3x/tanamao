@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Models\Supervisao\Planos\Detail;
+use App\Models\Supervisao\Planos\Plan;
 use App\Observers\Supervisao\Planos\DetailObserver;
+use App\Observers\Supervisao\Planos\PlanObserver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -26,5 +28,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Detail::observe(DetailObserver::class);
+        Plan::observe(PlanObserver::class);
     }
 }

@@ -68,16 +68,21 @@ class PlanController extends Controller
      */
     public function store(PlanService $planService, Request $request)
     {
+        // cria o plano na iPag
         $response = $planService->createPlan([
-            'name'          => 'Plano Diamante',
-            'description'   => 'Plano Diamante com até 8 treinos por semana',
-            'amount'        => '180.00',
-            'frequency'     => 'monthly',
-            'interval'      => '1'
+            'name'          => $request->name,
+            'description'   => $request->description,
+            'amount'        => $request->amount,
+            'frequency'     => $request->frequency,
+            'interval'      => $request->interval
         ]);
 
-        if ($response) {
-            return 'Criado com sucesso';
+        if ($response[0] === 201) {
+            $response = json_decode($response[1]);
+            $plan = $this->plan->create([
+                'api_id'    => $response->id
+            ]);
+            return redirect()->route('painel.planos.index');
         }
 
         return 'Erro ao criar';

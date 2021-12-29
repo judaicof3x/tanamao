@@ -70,7 +70,7 @@
                                         <!--end::Category=-->
                                         <!--begin::Status=-->
                                         <td class="text-center pe-0" data-order="Inactive">
-                                            @if ($d->status === 'ativo')
+                                            @if ($d->deleted_at === null)
                                                 <!--begin::Badges-->
                                                 <div class="badge badge-light-success">Ativo</div>
                                                 <!--end::Badges-->
@@ -100,11 +100,18 @@
                                                 <!--end::Menu item-->
                                                 <!--begin::Menu item-->
                                                 <div class="menu-item px-3">
-                                                    <a onclick="document.getElementById('destroy').submit()" class="menu-link px-3" data-kt-ecommerce-product-filter="delete_row">Deletar</a>
-                                                    <form id="destroy" action="{{ route('painel.planos.detalhes.destroy', $d->id) }}" method="post">
-                                                        @csrf
-                                                        @method('delete')
-                                                    </form>
+                                                    @if ($d->deleted_at === null)
+                                                        <a onclick="document.getElementById('destroy').submit()" class="menu-link px-3" data-kt-ecommerce-product-filter="delete_row">Desativar</a>
+                                                        <form id="destroy" action="{{ route('painel.planos.detalhes.destroy', $d->id) }}" method="post">
+                                                            @csrf
+                                                            @method('delete')
+                                                        </form>
+                                                    @else
+                                                        <a onclick="document.getElementById('restore').submit()" class="menu-link px-3" data-kt-ecommerce-product-filter="restore_row">Ativar</a>
+                                                        <form id="restore" action="{{ route('painel.planos.detalhes.restore', $d->id) }}" method="post">
+                                                            @csrf
+                                                        </form>
+                                                    @endif
                                                 </div>
                                                 <!--end::Menu item-->
                                             </div>

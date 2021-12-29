@@ -13,7 +13,7 @@ class PlanService
     public function createPlan(array $data)
     {
         $response = Http::withBasicAuth(env('BASIC_API_ID'), env('BASIC_API_KEY'))->post('https://sandbox.ipag.com.br/service/resources/plans', $data);
-        return $response->successful();
+        return [$response->status(), $response->collect()];
     }
 
     /**

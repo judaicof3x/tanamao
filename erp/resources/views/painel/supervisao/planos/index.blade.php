@@ -126,7 +126,8 @@
                         <!--begin::Modal body-->
                         <div class="modal-body scroll-y mx-lg-5 my-7">
                             <!--begin::Form-->
-                            <form id="kt_modal_add_role_form" class="form fv-plugins-bootstrap5 fv-plugins-framework" action="#">
+                            <form id="kt_modal_add_role_form" class="form fv-plugins-bootstrap5 fv-plugins-framework" action="{{ route('painel.planos.store') }}" method="post">
+                                @csrf
                                 <!--begin::Scroll-->
                                 <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_role_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_role_header" data-kt-scroll-wrappers="#kt_modal_add_role_scroll" data-kt-scroll-offset="300px" style="max-height: 50px;">
                                     <!--begin::Input group-->
@@ -252,7 +253,7 @@
 
                                                         <div class="mb-10">
                                                             <label class="form-label">Selecione os detalhes do plano:</label>
-                                                            <input class="form-control form-control-solid" value="" id="kt_tagify_6"/>
+                                                            <input type="text" class="form-control form-control-solid" value="" name="details" id="kt_tagify_6"/>
                                                         </div>
 
                                                         <!--end::Label-->
@@ -278,7 +279,8 @@
                                     </button>
                                 </div>
                                 <!--end::Actions-->
-                            <div></div></form>
+                            <div></div>
+                        </form>
                             <!--end::Form-->
                         </div>
                         <!--end::Modal body-->
