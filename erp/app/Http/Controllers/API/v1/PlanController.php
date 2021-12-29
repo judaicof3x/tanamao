@@ -3,17 +3,24 @@
 namespace App\Http\Controllers\API\v1;
 
 use App\Http\Controllers\Controller;
+use App\Models\Supervisao\Planos\Detail;
+use App\Models\Supervisao\Planos\Plan;
 use Illuminate\Http\Request;
 use App\Services\API\v1\PlanService;
+use Illuminate\Support\Facades\DB;
 
 class PlanController extends Controller
 {
 
     private $planService;
+    private $plan;
+    private $details;
 
-    public function __construct(PlanService $planService)
+    public function __construct(PlanService $planService, Plan $plan, Detail $details)
     {
         $this->planService = $planService;
+        $this->plan = $plan;
+        $this->details = $details;
     }
 
     /**
@@ -23,9 +30,24 @@ class PlanController extends Controller
      */
     public function index()
     {
-        $plans = $this->planService->listPlans();
-        $plans = $plans['data'];
-        return view('painel.supervisao.planos.index', compact('plans'));
+        $plansDB = $this->plan->all()->toArray(); // puxa os planos do banco de dados
+        $plansApi = $this->planService->listPlans(); // puxa os planos da api
+        $plansApi = $plansApi['data']; // limpa o array dos planos que vem da api
+        $details = $this->details->where('status', 'ativo')->get(); // puxa todos os detalhes de plano do banco de dados
+
+        $plans = [];
+        foreach($plansDB as $plan) {
+
+            $indiceApi = array_search($plan['api_id'], array_column($plansApi, 'id')); // pega o indice no array de planos da api (filtrando pelo campo api_id = id)
+            $idPlanApi = $plansApi[$indiceApi]; // guarda os dados em uma variavel somente daquele indice
+
+            $detailsPlan = $this->plan->find($plan['id'])->details; // pega os detalhes daquele plano para juntar no array
+
+            array_push($plan, $idPlanApi, $detailsPlan); // insere o plano da api junto com o do banco de dados
+            $plans[] = $plan; // adiciona no array de planos para usar na view
+        }
+        
+        return view('painel.supervisao.planos.index', compact('plans', 'details'));
     }
 
     /**

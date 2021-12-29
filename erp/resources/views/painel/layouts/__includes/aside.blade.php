@@ -232,7 +232,7 @@
                                     </a>
                                 </div>
                                 <div class="menu-item">
-                                    <a class="menu-link @if(request()->routeIs('painel.planos.detalhes.create')) active @endif" href="#">
+                                    <a class="menu-link @if(request()->routeIs('painel.planos.detalhes.create')) active @endif" href="{{ route('painel.planos.detalhes.create') }}">
                                         <span class="menu-bullet">
                                             <span class="bullet bullet-dot"></span>
                                         </span>

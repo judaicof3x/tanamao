@@ -28,7 +28,7 @@
                     <!--begin::Card toolbar-->
                     <div class="card-toolbar flex-row-fluid justify-content-end gap-5" data-select2-id="select2-data-123-okpj">
                         <!--begin::Add product-->
-                        <a href="{{ route('painel.planos.detalhes.create') }}" class="btn btn-primary col-12 col-lg-2">Adicionar</a>
+                        <a href="{{ route('painel.planos.detalhes.create') }}" class="btn btn-primary col-12 col-lg-3">Adicionar</a>
                         <!--end::Add product-->
                     </div>
                     <!--end::Card toolbar-->
