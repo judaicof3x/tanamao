@@ -11,7 +11,7 @@
                     <!--begin::Card title-->
                     <div class="card-title">
                         <!--begin::Search-->
-                        <div class="d-flex align-items-center position-relative my-1">
+                        <div class="d-none d-flex align-items-center position-relative my-1">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
                             <span class="svg-icon svg-icon-1 position-absolute ms-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -28,7 +28,9 @@
                     <!--begin::Card toolbar-->
                     <div class="card-toolbar flex-row-fluid justify-content-end gap-5" data-select2-id="select2-data-123-okpj">
                         <!--begin::Add product-->
-                        <a href="{{ route('painel.planos.detalhes.create') }}" class="btn btn-primary col-12 col-lg-3">Adicionar</a>
+                        <a href="{{ route('painel.planos.detalhes.create') }}" class="btn btn-primary col-12 col-lg-3">
+                            <i class="fa fa-plus"></i>
+                            Adicionar</a>
                         <!--end::Add product-->
                     </div>
                     <!--end::Card toolbar-->
@@ -101,14 +103,14 @@
                                                 <!--begin::Menu item-->
                                                 <div class="menu-item px-3">
                                                     @if ($d->deleted_at === null)
-                                                        <a onclick="document.getElementById('destroy').submit()" class="menu-link px-3" data-kt-ecommerce-product-filter="delete_row">Desativar</a>
-                                                        <form id="destroy" action="{{ route('painel.planos.detalhes.destroy', $d->id) }}" method="post">
+                                                        <a onclick="document.getElementById('{{ $d->id }}').submit()" class="menu-link px-3" data-kt-ecommerce-product-filter="delete_row">Desativar</a>
+                                                        <form id="{{ $d->id }}" action="{{ route('painel.planos.detalhes.destroy', $d->slug) }}" method="post">
                                                             @csrf
                                                             @method('delete')
                                                         </form>
                                                     @else
-                                                        <a onclick="document.getElementById('restore').submit()" class="menu-link px-3" data-kt-ecommerce-product-filter="restore_row">Ativar</a>
-                                                        <form id="restore" action="{{ route('painel.planos.detalhes.restore', $d->id) }}" method="post">
+                                                        <a onclick="document.getElementById('{{ $d->id }}').submit()" class="menu-link px-3" data-kt-ecommerce-product-filter="restore_row">Ativar</a>
+                                                        <form id="{{ $d->id }}" action="{{ route('painel.planos.detalhes.restore', $d->slug) }}" method="post">
                                                             @csrf
                                                         </form>
                                                     @endif

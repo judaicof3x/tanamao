@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Supervisao\Planos\DetailRequest;
 use App\Models\Supervisao\Planos\Detail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DetailController extends Controller
 {
@@ -39,6 +40,9 @@ class DetailController extends Controller
     public function store(DetailRequest $request)
     {
         $detail = Detail::create($request->except('_token'));
+        if($detail->status === 'inativo') {
+            Detail::withTrashed()->where('slug', '=', $detail->slug)->delete();
+        }
         return redirect()->route('painel.planos.detalhes.index');
     }
 
@@ -77,6 +81,12 @@ class DetailController extends Controller
     {
         $detail = Detail::withTrashed()->findOrFail($id)->update($request->except('_token'));
         $detail = Detail::withTrashed()->findOrFail($id);
+        if($detail->status === 'inativo') {
+            Detail::withTrashed()->where('slug', '=', $detail->slug)->delete();
+        }
+        if($detail->status === 'ativo') {
+            Detail::withTrashed()->where('slug', '=', $detail->slug)->restore();
+        }
         return redirect()->route('painel.planos.detalhes.edit', $detail->slug);
     }
 
@@ -86,9 +96,9 @@ class DetailController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($slug)
     {
-        Detail::findOrFail($id)->destroy($id);
+        Detail::withTrashed()->where('slug', '=', $slug)->delete();
         return redirect()->route('painel.planos.detalhes.index');
     }
 
@@ -98,9 +108,21 @@ class DetailController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function restore($id)
+    public function restore($slug)
     {
-        Detail::withTrashed()->findOrFail($id)->restore($id);
+        Detail::withTrashed()->where('slug', '=', $slug)->restore();
+        return redirect()->route('painel.planos.detalhes.index');
+    }
+
+    /**
+     * Deleta um detalhe no banco.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function forceDelete($slug)
+    {
+        Detail::withTrashed()->where('slug', '=', $slug)->forceDelete();
         return redirect()->route('painel.planos.detalhes.index');
     }
 }

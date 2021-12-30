@@ -21,9 +21,11 @@ class PlanService
      *
      * @return void
      */
-    public function listPlans()
+    public function listPlans($page = null)
     {
-        $response = Http::withBasicAuth(env('BASIC_API_ID'), env('BASIC_API_KEY'))->get('https://sandbox.ipag.com.br/service/resources/plans');
+        $response = Http::withBasicAuth(env('BASIC_API_ID'), env('BASIC_API_KEY'))->get('https://sandbox.ipag.com.br/service/resources/plans', [
+            'page' => $page
+        ]);
 
         if ($response->successful()) {
             return $response->json();

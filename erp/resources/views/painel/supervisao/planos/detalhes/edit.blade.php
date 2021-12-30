@@ -114,7 +114,7 @@
                 </div>
                 <!--end::Main column-->
             </form>
-            <form id="destroy" action="{{ route('painel.planos.detalhes.destroy', $detail->id) }}" method="post">
+            <form id="destroy" action="{{ route('painel.planos.detalhes.forceDelete', $detail->slug) }}" method="post">
                 @csrf
                 @method('delete')
             </form>

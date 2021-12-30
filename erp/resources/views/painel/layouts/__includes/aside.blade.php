@@ -186,8 +186,8 @@
                         <span class="menu-title">Planos</span>
                         <span class="menu-arrow"></span>
                     </span>
-                    <div class="menu-sub menu-sub-accordion @if(request()->routeIs('painel.planos.index')) show @endif">
-                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion @if(request()->routeIs('painel.planos.index')) show @endif mb-1">
+                    <div class="menu-sub menu-sub-accordion @if(request()->routeIs('painel.planos.index') OR request()->routeIs('painel.planos.create')) show @endif">
+                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion @if(request()->routeIs('painel.planos.index') OR request()->routeIs('painel.planos.create')) show @endif mb-1">
                             <span class="menu-link">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
@@ -205,7 +205,7 @@
                                     </a>
                                 </div>
                                 <div class="menu-item">
-                                    <a class="menu-link" href="#">
+                                    <a class="menu-link @if(request()->routeIs('painel.planos.create')) active @endif" href="{{ route('painel.planos.create') }}">
                                         <span class="menu-bullet">
                                             <span class="bullet bullet-dot"></span>
                                         </span>

@@ -17,6 +17,7 @@ class CreatePlansTable extends Migration
             $table->id();
             $table->string('api_id')->unique();
             $table->string('slug')->unique();
+            $table->enum('status', ['ativo', 'inativo'])->default('ativo');
             $table->timestamps();
             $table->softDeletes();
         });

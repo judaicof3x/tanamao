@@ -7,7 +7,6 @@ use App\Models\Supervisao\Planos\Detail;
 use App\Models\Supervisao\Planos\Plan;
 use Illuminate\Http\Request;
 use App\Services\API\v1\PlanService;
-use Illuminate\Support\Facades\DB;
 
 class PlanController extends Controller
 {
@@ -32,14 +31,19 @@ class PlanController extends Controller
     {
         $plansDB = $this->plan->all()->toArray(); // puxa os planos do banco de dados
         $plansApi = $this->planService->listPlans(); // puxa os planos da api
-        $plansApi = $plansApi['data']; // limpa o array dos planos que vem da api
         $details = $this->details->where('status', 'ativo')->get(); // puxa todos os detalhes de plano do banco de dados
+
+        $p = [];
+
+        for($i = 1; $i <= $plansApi['meta']['last_page']; $i++){
+            $plansApi = $this->planService->listPlans($i);
+            $p = array_merge($p, $plansApi['data']);
+        }
 
         $plans = [];
         foreach($plansDB as $plan) {
-
-            $indiceApi = array_search($plan['api_id'], array_column($plansApi, 'id')); // pega o indice no array de planos da api (filtrando pelo campo api_id = id)
-            $idPlanApi = $plansApi[$indiceApi]; // guarda os dados em uma variavel somente daquele indice
+            $indiceApi = array_search($plan['api_id'], array_column($p, 'id')); // pega o indice no array de planos da api (filtrando pelo campo api_id = id)
+            $idPlanApi = $p[$indiceApi]; // guarda os dados em uma variavel somente daquele indice
 
             $detailsPlan = $this->plan->find($plan['id'])->details; // pega os detalhes daquele plano para juntar no array
 
@@ -68,6 +72,16 @@ class PlanController extends Controller
      */
     public function store(PlanService $planService, Request $request)
     {
+        //$details = $this->details->where('name', '=', 'post')->get();
+        
+        //foreach($request->details as $d) {
+        //   echo $d;
+        //}
+
+        //die();
+
+        $plan = $this->plan;
+
         // cria o plano na iPag
         $response = $planService->createPlan([
             'name'          => $request->name,
@@ -77,11 +91,12 @@ class PlanController extends Controller
             'interval'      => $request->interval
         ]);
 
+        // se criar na iPag, ele cria no nosso banco
         if ($response[0] === 201) {
             $response = json_decode($response[1]);
-            $plan = $this->plan->create([
-                'api_id'    => $response->id
-            ]);
+            $plan->api_id = $response->id;
+            //$plan->details()->sync([$response->details]);
+            $plan->save();
             return redirect()->route('painel.planos.index');
         }
 

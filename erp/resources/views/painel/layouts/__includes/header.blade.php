@@ -29,7 +29,7 @@
                 <!--begin::Page title-->
                 <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_header_nav'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
                     <!--begin::Title-->
-                    <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Boa noite, {{ auth()->user()->name }}!</h1>
+                    <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">{{ saudacao(auth()->user()->name) }}!</h1>
                     <!--end::Title-->
                     <!--begin::Separator-->
                     <span class="h-20px border-gray-300 border-start mx-4"></span>
@@ -44,11 +44,7 @@
                             <span class="bullet bg-gray-300 w-5px h-2px"></span>
                         </li>
                         <!--end::Item-->
-                        <!--begin::Item-->
-                        <li class="breadcrumb-item text-muted">
-                            <a href="#" class="text-muted text-hover-primary">Visão geral</a>
-                        </li>
-                        <!--end::Item-->
+                        @yield('breadcrumb')
                     </ul>
                     <!--end::Breadcrumb-->
                 </div>

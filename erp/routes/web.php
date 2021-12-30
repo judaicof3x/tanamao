@@ -37,8 +37,9 @@ Route::middleware(['auth:sanctum', 'verified'])
         Route::get('planos/detalhes/{slug}', [DetailController::class, 'show'])->name('planos.detalhes.show'); // exibe o detalhe
         Route::get('planos/detalhes/{slug}/editar', [DetailController::class, 'edit'])->name('planos.detalhes.edit'); // exibe o form de edição
         Route::put('planos/detalhes/{id}/editar', [DetailController::class, 'update'])->name('planos.detalhes.update'); // atualiza o detalhe no banco
-        Route::delete('planos/detalhes/{id}', [DetailController::class, 'destroy'])->name('planos.detalhes.destroy'); // desativa o detalhe no banco
-        Route::post('planos/detalhes/{id}', [DetailController::class, 'restore'])->name('planos.detalhes.restore'); // ativa o detalhe no banco
+        Route::delete('planos/detalhes/{slug}', [DetailController::class, 'destroy'])->name('planos.detalhes.destroy'); // desativa o detalhe no banco
+        Route::post('planos/detalhes/{slug}', [DetailController::class, 'restore'])->name('planos.detalhes.restore'); // ativa o detalhe no banco
+        Route::delete('planos/detalhes/{slug}/editar', [DetailController::class, 'forceDelete'])->name('planos.detalhes.forceDelete'); // deleta o detalhe no banco
 
         // Rotas Supervisão -> Planos
         Route::get('planos', [PlanController::class, 'index'])->name('planos.index'); // lista os planos

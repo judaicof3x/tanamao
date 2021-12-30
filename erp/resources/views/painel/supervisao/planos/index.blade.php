@@ -1,5 +1,23 @@
 @extends('painel.layouts.main')
 
+@section('breadcrumb')
+    <!--begin::Item-->
+    <li class="breadcrumb-item text-muted">
+        <a class="text-muted text-hover-primary">Planos</a>
+    </li>
+    <!--end::Item-->
+    <!--begin::Item-->
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-300 w-5px h-2px"></span>
+    </li>
+    <!--end::Item-->
+    <!--begin::Item-->
+    <li class="breadcrumb-item text-muted">
+        <a class="text-muted text-hover-primary">Lista de planos</a>
+    </li>
+    <!--end::Item-->
+@endsection
+
 @section('custom-javascript')
     <script>
         // The DOM elements you wish to replace with Tagify
@@ -80,14 +98,14 @@
                         <!--begin::Card body-->
                         <div class="card-body d-flex flex-center">
                             <!--begin::Button-->
-                            <button type="button" class="btn btn-clear d-flex flex-column flex-center" data-bs-toggle="modal" data-bs-target="#kt_modal_add_role">
+                            <a type="button" class="btn btn-clear d-flex flex-column flex-center" href="{{ route('painel.planos.create') }}">
                                 <!--begin::Illustration-->
                                 <img src="{{ URL::asset('media/illustrations/sketchy-1/4.png') }}" alt="" class="mw-100 mh-150px mb-7">
                                 <!--end::Illustration-->
                                 <!--begin::Label-->
-                                <div class="fw-bolder fs-3 text-gray-600 text-hover-primary">Add novo plano</div>
+                                <div class="fw-bolder fs-3 text-gray-600 text-hover-primary">Adicionar plano</div>
                                 <!--end::Label-->
-                            </button>
+                            </a>
                             <!--begin::Button-->
                         </div>
                         <!--begin::Card body-->
@@ -253,7 +271,7 @@
 
                                                         <div class="mb-10">
                                                             <label class="form-label">Selecione os detalhes do plano:</label>
-                                                            <input type="text" class="form-control form-control-solid" value="" name="details" id="kt_tagify_6"/>
+                                                            <input type="text" class="form-control form-control-solid" value="" name="details[]" id="kt_tagify_6"/>
                                                         </div>
 
                                                         <!--end::Label-->
