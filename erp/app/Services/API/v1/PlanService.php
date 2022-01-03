@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Http;
 
 class PlanService 
 {
+
     /**
      * Novo Plano de Assinatura.
      *
@@ -42,7 +43,7 @@ class PlanService
     public function getPlan(string $id)
     {
         $response = Http::withBasicAuth(env('BASIC_API_ID'), env('BASIC_API_KEY'))->get("https://sandbox.ipag.com.br/service/resources/plans?id={$id}");    
-        return $response->successful();
+        return [$response->status(), $response->collect()];
     }
 
     /**
@@ -65,5 +66,27 @@ class PlanService
     {
         $response = Http::withBasicAuth(env('BASIC_API_ID'), env('BASIC_API_KEY'))->delete("https://sandbox.ipag.com.br/service/resources/plans?id={$id}");
         return $response->successful();
+    }
+
+    /**
+     * Nova Assinatura.
+     *
+     * @return void
+     */
+    public function createSubscription(array $data)
+    {
+        $response = Http::withBasicAuth(env('BASIC_API_ID'), env('BASIC_API_KEY'))->post('https://sandbox.ipag.com.br/service/resources/subscriptions', $data);
+        return [$response->status(), $response->collect()];
+    }
+
+    /**
+     * Alterar Assinatura.
+     *
+     * @return void
+     */
+    public function updateSubscription(string $id, array $data)
+    {
+        $response = Http::withBasicAuth(env('BASIC_API_ID'), env('BASIC_API_KEY'))->put("https://sandbox.ipag.com.br/service/resources/subscriptions?id={$id}", $data);
+        return [$response->status(), $response->collect()];
     }
 }

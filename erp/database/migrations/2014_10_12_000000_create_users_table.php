@@ -15,14 +15,24 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->boolean('is_admin')->default(false);
+            $table->boolean('is_financial')->default(false);
+            $table->boolean('is_salesman')->default(false);
+            $table->boolean('is_administrative')->default(false);
+            $table->boolean('is_operational')->default(false);
+            $table->boolean('is_clerk')->default(false);
+            $table->boolean('is_customer')->default(false);
+            $table->string('first_name');
+            $table->string('last_name')->nullable();
+            $table->string('cpf')->nullable();
+            $table->string('phone')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->foreignId('current_team_id')->nullable();
-            $table->string('profile_photo_path', 2048)->nullable();
+            $table->string('profile_photo_path', 2048)->default('blank.png');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

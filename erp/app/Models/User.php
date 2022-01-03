@@ -24,7 +24,17 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
+        'cpf',
+        'phone',
+        'is_admin',
+        'is_financial',
+        'is_salesman',
+        'is_administrative',
+        'is_operational',
+        'is_clerk',
+        'is_customer',
         'email',
         'password',
     ];
@@ -58,4 +68,11 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    /**
+     * Relacionamento entre empresas
+     */
+    public function tenant() {
+        return $this->hasOne(Tenant::class);
+    }
 }

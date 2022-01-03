@@ -72,14 +72,6 @@ class PlanController extends Controller
      */
     public function store(PlanService $planService, Request $request)
     {
-        //$details = $this->details->where('name', '=', 'post')->get();
-        
-        //foreach($request->details as $d) {
-        //   echo $d;
-        //}
-
-        //die();
-
         $plan = $this->plan;
 
         // cria o plano na iPag
@@ -106,12 +98,15 @@ class PlanController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  string  $slug
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $plan = $this->plan->where('slug', $slug)->firstOrFail();
+        $plan = $this->planService->getPlan($plan->api_id);
+        //dd($plan[1]['attributes']);
+        return view('painel.supervisao.planos.show', compact('plan'));
     }
 
     /**
