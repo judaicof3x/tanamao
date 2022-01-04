@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->boolean('is_operational')->default(false);
             $table->boolean('is_clerk')->default(false);
             $table->boolean('is_customer')->default(false);
-            $table->string('first_name');
+            $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('cpf')->nullable();
             $table->string('phone')->nullable();

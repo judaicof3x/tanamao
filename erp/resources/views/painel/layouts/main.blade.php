@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 	<!--begin::Head-->
-	<head><base href="">
+	<head>
 		<title>Tá na mão, Macaé</title>
         <link rel="shortcut icon" href="{{ URL::asset('media/logos/png/branco/branco1.png') }}" />
         @include('painel.layouts.__includes.meta')

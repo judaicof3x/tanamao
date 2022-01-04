@@ -3,86 +3,73 @@
 	<!--begin::Head-->
 	<head>
 		<title>Tá na mão, Macaé</title>
-		<meta charset="utf-8" />
-		<meta name="description" content="" />
-		<meta name="keywords" content="" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta property="og:locale" content="pt-BR" />
-		<meta property="og:type" content="article" />
-		<meta property="og:title" content="Tá na mão, Macaé" />
-		<meta property="og:url" content="https://painel.tanamaomacae.com.br/" />
-		<meta property="og:site_name" content="Tá na mão, Macaé" />
-		<link rel="canonical" href="#" />
-		<link rel="shortcut icon" href="{{ URL::asset('media/logos/favicon-black.ico') }}" />
+        <link rel="shortcut icon" href="{{ URL::asset('media/logos/png/branco/branco1.png') }}" />
+        @include('painel.layouts.__includes.meta')
 		<!--begin::Fonts-->
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+		    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 		<!--end::Fonts-->
+		<!--begin::Page Vendor Stylesheets(used by this page)-->
+            @yield('custom-css')
+		<!--end::Page Vendor Stylesheets-->
 		<!--begin::Global Stylesheets Bundle(used by all pages)-->
-		<link href="{{ URL::asset('plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
-		<link href="{{ URL::asset('css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+            @include('painel.layouts.__includes.css')
 		<!--end::Global Stylesheets Bundle-->
 	</head>
 	<!--end::Head-->
 	<!--begin::Body-->
 	<body id="kt_body" class="bg-body">
 		<!--begin::Main-->
+		<!--begin::Root-->
 		<div class="d-flex flex-column flex-root">
-			<!--begin::Authentication - Sign-in -->
-			<div class="d-flex flex-column flex-lg-row flex-column-fluid">
+			<!--begin::Authentication-->
+			<div class="d-flex flex-column flex-xl-row flex-column-fluid">
 				<!--begin::Aside-->
-				<div class="d-flex flex-column flex-lg-row-auto w-xl-600px positon-xl-relative" style="background-image: url('{{ URL::asset('media/backgrounds/macae-rj.jpg') }}'); background-repeat: no-repeat; background-size: cover;">
-					<!--begin::Wrapper-->
-					<div class="d-flex flex-column position-xl-fixed w-xl-600px">
-						<!--begin::Content-->
-						<div class="d-flex flex-column text-center p-10 pt-lg-20">
-							<!--begin::Logo-->
-							<a href="#" class="d-none py-9 mb-5">
-								<img alt="Logo" src="{{ URL::asset('media/logos/F3X-Horizontal-Light.png')}}" class="h-90px" />
-							</a>
-							<!--end::Logo-->
-							<!--begin::Title-->
-							<h1 class="d-none fw-bolder fs-2qx pb-5 pb-md-10" style="color: #986923;">Agência F3X</h1>
-							<!--end::Title-->
-							<!--begin::Description-->
-							<p class="d-none fs-4 text-white">Agência F3X,
-							<br />inspirando e inovando</p>
-							<!--end::Description-->
-						</div>
-						<!--end::Content-->
-						<!--begin::Illustration-->
-						<div class="d-flex flex-row-auto bgi-no-repeat bgi-position-x-center bgi-size-contain bgi-position-y-bottom min-h-100px min-h-lg-350px" style="background-image: url(/metronic8/demo1/assets/media/illustrations/sketchy-1/13.png"></div>
-						<!--end::Illustration-->
-					</div>
-					<!--end::Wrapper-->
-				</div>
-				<!--end::Aside-->
-				<!--begin::Body-->
-				<div class="d-flex flex-column flex-lg-row-fluid py-10">
+				<div class="d-flex flex-column flex-center flex-lg-row-fluid">
 					<!--begin::Content-->
-					<div class="d-flex flex-center flex-column flex-column-fluid">
-						<!--begin::Wrapper-->
-						<div class="w-lg-500px p-10 p-lg-15 mx-auto">
-							<!--begin::Form-->
-								@yield('content')
-							<!--end::Form-->
-						</div>
-						<!--end::Wrapper-->
+					<div class="d-flex align-items-start flex-column p-5 p-lg-15">
+						<!--begin::Logo-->
+						<a href="#" class="mb-15">
+							<img alt="Logo" src="{{ URL::asset('media/logos/png/preto/preto5.png') }}" class="h-80px" />
+						</a>
+						<!--end::Logo-->
+						<!--begin::Title-->
+						<h1 class="text-dark fs-2x mb-3">Bem vindo, empresário!</h1>
+						<!--end::Title-->
+						<!--begin::Description-->
+						<div class="fw-bold fs-4 text-gray-400 mb-10">É hora do seu negócio vender mais,
+						<br />tenha a cidade na palma da mão!</div>
+						<!--begin::Description-->
+						<!--begin::Illustration-->
+						<img src="{{ URL::asset('media/illustrations/sigma-1/8.png') }}" class="h-250px h-lg-350px" />
+						<!--end::Illustration-->
 					</div>
 					<!--end::Content-->
 				</div>
-				<!--end::Body-->
+				<!--begin::Aside-->
+				<!--begin::Content-->
+				<div class="flex-row-fluid d-flex flex-center justfiy-content-xl-first p-10">
+					<!--begin::Wrapper-->
+					<div class="d-flex flex-center p-15 shadow-sm bg-body rounded w-100 w-md-550px mx-auto ms-xl-20">
+						<!--begin::Form-->
+						@yield('content')
+						<!--end::Form-->
+					</div>
+					<!--end::Wrapper-->
+				</div>
+				<!--end::Right Content-->
 			</div>
-			<!--end::Authentication - Sign-in-->
+			<!--end::Authentication-->
 		</div>
+		<!--end::Root-->
 		<!--end::Main-->
-		<script>var hostUrl = "/";</script>
 		<!--begin::Javascript-->
+		<script>var hostUrl = "/";</script>
 		<!--begin::Global Javascript Bundle(used by all pages)-->
-		<script src="{{ URL::asset('plugins/global/plugins.bundle.js') }}"></script>
-		<script src="{{ URL::asset('js/scripts.bundle.js') }}"></script>
+            @include('painel.layouts.__includes.javascript')
+            <script src="{{ URL::asset('js/custom/authentication/sign-up/free-trial.js') }}"></script>
 		<!--end::Global Javascript Bundle-->
 		<!--begin::Page Custom Javascript(used by this page)-->
-		<script src="{{ URL::asset('js/custom/authentication/sign-in/general.js') }}"></script>
+            @yield('custom-javascript')
 		<!--end::Page Custom Javascript-->
 		<!--end::Javascript-->
 	</body>
