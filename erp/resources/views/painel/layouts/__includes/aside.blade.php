@@ -99,7 +99,7 @@
                             <span class="menu-section text-muted text-uppercase fs-8 ls-1">Supervisão</span>
                         </div>
                     </div>
-                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion mb-1">
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion mb-1 d-none">
                         <span class="menu-link">
                             <span class="menu-icon">
                                 <!--begin::Svg Icon | path: icons/duotune/general/gen051.svg-->
@@ -142,7 +142,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                            <div data-kt-menu-trigger="click" class="d-none menu-item menu-accordion">
                                 <span class="menu-link">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
@@ -169,7 +169,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="menu-item">
+                            <div class="menu-item d-none">
                                 <a class="menu-link" href="#">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
@@ -212,7 +212,7 @@
                                             <span class="menu-title">Lista de planos</span>
                                         </a>
                                     </div>
-                                    <div class="menu-item">
+                                    <div class="menu-item d-none">
                                         <a class="menu-link @if(request()->routeIs('painel.planos.create')) active @endif" href="{{ route('painel.planos.create') }}">
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>

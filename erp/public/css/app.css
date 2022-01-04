@@ -1577,9 +1577,6 @@ select {
 .p-10 {
   padding: 2.5rem;
 }
-.p-4 {
-  padding: 1rem;
-}
 .p-9 {
   padding: 2.25rem;
 }
@@ -1591,6 +1588,9 @@ select {
 }
 .p-3 {
   padding: 0.75rem;
+}
+.p-4 {
+  padding: 1rem;
 }
 .px-4 {
   padding-left: 1rem;

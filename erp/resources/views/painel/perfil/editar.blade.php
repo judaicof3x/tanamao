@@ -20,7 +20,7 @@
                         <!--begin: Pic-->
                         <div class="me-7 mb-4">
                             <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-                                <img src="{{ auth()->user()->profile_photo_path }}" alt="image">
+                                <img src="/storage/profile/{{ Auth::user()->profile_photo_path }}" alt="image">
                                 <div class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px"></div>
                             </div>
                         </div>
@@ -69,11 +69,13 @@
                             <a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="{{ route('painel.perfil.editar') }}">Configurações</a>
                         </li>
                         <!--end::Nav item-->
-                        <!--begin::Nav item-->
-                        <li class="nav-item mt-2">
-                            <a class="nav-link text-active-primary ms-0 me-10 py-5" href="#">Plano</a>
-                        </li>
-                        <!--end::Nav item-->
+                        @if(auth()->user()->is_customer)
+                            <!--begin::Nav item-->
+                            <li class="nav-item mt-2">
+                                <a class="nav-link text-active-primary ms-0 me-10 py-5" href="#">Plano</a>
+                            </li>
+                            <!--end::Nav item-->
+                        @endif
                     </ul>
                     <!--begin::Navs-->
                 </div>
@@ -106,9 +108,9 @@
                                 <!--begin::Col-->
                                 <div class="col-lg-8">
                                     <!--begin::Image input-->
-                                    <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('{{ auth()->user()->profile_photo_path }}')">
+                                    <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('/storage/profile/{{ Auth::user()->profile_photo_path }}')">
                                         <!--begin::Preview existing avatar-->
-                                        <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{ auth()->user()->profile_photo_path }})"></div>
+                                        <div class="image-input-wrapper w-125px h-125px" style="background-image: url(/storage/profile/{{ Auth::user()->profile_photo_path }})"></div>
                                         <!--end::Preview existing avatar-->
                                         <!--begin::Label-->
                                         <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="Trocar avatar">
@@ -141,7 +143,7 @@
                             <!--begin::Input group-->
                             <div class="row mb-6">
                                 <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label required fw-bold fs-6">Nome completo:</label>
+                                <label class="col-lg-4 col-form-label required fw-bold fs-6">Primeiro nome:</label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8">
@@ -149,7 +151,27 @@
                                     <div class="row">
                                         <!--begin::Col-->
                                         <div class="fv-row fv-plugins-icon-container">
-                                            <input type="text" name="name" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" value="{{ auth()->user()->name }}">
+                                            <input type="text" name="first_name" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" value="{{ auth()->user()->first_name }}">
+                                        <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label required fw-bold fs-6">Último nome:</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="fv-row fv-plugins-icon-container">
+                                            <input type="text" name="last_name" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" value="{{ auth()->user()->last_name }}">
                                         <div class="fv-plugins-message-container invalid-feedback"></div></div>
                                         <!--end::Col-->
                                     </div>

@@ -16,6 +16,8 @@ class TenantController extends Controller
     }
 
     public function storeTenant(storeTenantRequest $request) {
+        dd($request);
+        
         $response = new Tenant();
         $response->user_id = auth()->user()->id;
         $response->name = $request->name;

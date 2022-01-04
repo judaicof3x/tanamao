@@ -25,7 +25,7 @@
 
         // Initialize Tagify script on the above inputs
         new Tagify(input, {
-            whitelist: [@foreach($details as $d) "{{ $d->name }}", @endforeach],
+            whitelist:  [@foreach($details as $d) "{{ $d->name }}", @endforeach],
             maxTags: 20,
             dropdown: {
                 maxItems: 20,           // <- mixumum allowed rendered suggestions
@@ -82,8 +82,8 @@
                             <!--end::Card body-->
                             <!--begin::Card footer-->
                             <div class="card-footer flex-wrap pt-0">
-                                <a href="{{ route('painel.planos.show', $p['slug']) }}" class="btn btn-light btn-active-primary my-1 me-2">Ver plano</a>
-                                <button type="button" class="btn btn-light btn-active-light-primary my-1" data-bs-toggle="modal" data-bs-target="#kt_modal_update_role">Editar plano</button>
+                                <a href="{{ route('painel.planos.show', $p['slug']) }}" class="btn btn-light-danger btn-active-danger my-1 me-2 col-12">Excluir plano</a>
+                                <button type="button" class="d-none btn btn-light btn-active-light-primary my-1" data-bs-toggle="modal" data-bs-target="#kt_modal_update_role">Editar plano</button>
                             </div>
                             <!--end::Card footer-->
                         </div>
@@ -98,14 +98,14 @@
                         <!--begin::Card body-->
                         <div class="card-body d-flex flex-center">
                             <!--begin::Button-->
-                            <a type="button" class="btn btn-clear d-flex flex-column flex-center" href="{{ route('painel.planos.create') }}">
+                            <button type="button" class="btn btn-clear d-flex flex-column flex-center" data-bs-toggle="modal" data-bs-target="#kt_modal_add_role">
                                 <!--begin::Illustration-->
                                 <img src="{{ URL::asset('media/illustrations/sketchy-1/4.png') }}" alt="" class="mw-100 mh-150px mb-7">
                                 <!--end::Illustration-->
                                 <!--begin::Label-->
                                 <div class="fw-bolder fs-3 text-gray-600 text-hover-primary">Adicionar plano</div>
                                 <!--end::Label-->
-                            </a>
+                            </button>
                             <!--begin::Button-->
                         </div>
                         <!--begin::Card body-->
@@ -254,8 +254,25 @@
                                         <!--end::Input-->
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                                     <!--end::Input group-->
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10 fv-plugins-icon-container">
+                                        <!--begin::Label-->
+                                        <label class="fs-5 fw-bolder form-label mb-2">
+                                            <span class="required">Detalhes</span>
+                                        </label>
+                                        <!--end::Label-->
+                                        @foreach($details as $detail)
+                                            <div class="form-check form-check-custom form-check-solid mb-5">
+                                                <input class="form-check-input" type="checkbox" name="details[]" value="{{ $detail->id }}" id="flexCheckDefault"/>
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                    {{ $detail->name }}
+                                                </label>
+                                            </div>
+                                        @endforeach
+                                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                                    <!--end::Input group-->
                                     <!--begin::Permissions-->
-                                    <div class="fv-row">
+                                    <div class="d-none fv-row">
                                         <!--begin::Label-->
                                         <label class="fs-5 fw-bolder form-label mb-2">Detalhes</label>
                                         <!--end::Label-->
@@ -289,10 +306,10 @@
                                 <!--end::Scroll-->
                                 <!--begin::Actions-->
                                 <div class="text-center pt-15">
-                                    <button type="reset" class="btn btn-light me-3" data-kt-roles-modal-action="cancel">Discard</button>
+                                    <button type="reset" class="btn btn-light me-3" data-kt-roles-modal-action="cancel">Cancelar</button>
                                     <button type="submit" class="btn btn-primary" data-kt-roles-modal-action="submit">
-                                        <span class="indicator-label">Submit</span>
-                                        <span class="indicator-progress">Please wait... 
+                                        <span class="indicator-label">Adicionar</span>
+                                        <span class="indicator-progress">Aguarde... 
                                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                     </button>
                                 </div>

@@ -72,6 +72,7 @@ class PlanController extends Controller
      */
     public function store(PlanService $planService, Request $request)
     {
+        //dd($request->details);
         $plan = $this->plan;
 
         // cria o plano na iPag
@@ -87,8 +88,14 @@ class PlanController extends Controller
         if ($response[0] === 201) {
             $response = json_decode($response[1]);
             $plan->api_id = $response->id;
-            //$plan->details()->sync([$response->details]);
             $plan->save();
+            
+            foreach($request->details as $d) {
+                if($d) {
+                    $plan->details->attach($d);
+                }
+            }
+            
             return redirect()->route('painel.planos.index');
         }
 

@@ -69,11 +69,13 @@
                             <a class="nav-link text-active-primary ms-0 me-10 py-5" href="{{ route('painel.perfil.editar') }}">Configurações</a>
                         </li>
                         <!--end::Nav item-->
-                        <!--begin::Nav item-->
-                        <li class="nav-item mt-2">
-                            <a class="nav-link text-active-primary ms-0 me-10 py-5" href="#">Plano</a>
-                        </li>
-                        <!--end::Nav item-->
+                        @if(auth()->user()->is_customer)
+                            <!--begin::Nav item-->
+                            <li class="nav-item mt-2">
+                                <a class="nav-link text-active-primary ms-0 me-10 py-5" href="#">Plano</a>
+                            </li>
+                            <!--end::Nav item-->
+                        @endif
                     </ul>
                     <!--begin::Navs-->
                 </div>
