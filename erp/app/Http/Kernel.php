@@ -76,6 +76,9 @@ class Kernel extends HttpKernel
         'is_administrative' => IsAdministrative::class,
         'is_operational' => IsOperational::class,
         'is_clerk' => IsClerk::class,
-        'is_customer' => IsCustomer::class
+        'is_customer' => IsCustomer::class,
+        'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
+        'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
+        'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
     ];
 }

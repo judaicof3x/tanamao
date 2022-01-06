@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Contracts\Role as ContractsRole;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class PainelController extends Controller
 {
@@ -13,6 +16,20 @@ class PainelController extends Controller
      */
     public function home() {
         if(auth()->user()->is_admin) {
+
+            // Role::create(['name' => 'admin']);
+            // Permission::create(['name' => 'write post']);
+
+            // $role = Role::findById(1);
+            // $role->givePermissionTo('edit post');
+
+            // $role = Role::findByName('writer');
+
+             auth()->user()->assignRole(['admin']);
+            // auth()->user()->givePermissionTo('write post');
+
+            // $permissions = auth()->user()->permissions;
+            // dd($permissions);
             return view('painel.welcome.admin');
         } elseif(auth()->user()->is_financial) {
             return view('painel.welcome.financial');
